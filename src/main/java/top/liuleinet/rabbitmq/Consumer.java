@@ -15,9 +15,9 @@ import java.util.concurrent.TimeoutException;
 public class Consumer {
     public static void main(String[] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(Constant.HOSTNAME);
-        factory.setUsername(Constant.USERNAME);
-        factory.setPassword(Constant.PASSWORD);
+        factory.setHost(MqUtil.HOSTNAME);
+        factory.setUsername(MqUtil.USERNAME);
+        factory.setPassword(MqUtil.PASSWORD);
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
@@ -35,6 +35,6 @@ public class Consumer {
          * 3. 消费者接收的回调
          * 4. 消费者被取消消费的回调
          */
-        channel.basicConsume(Constant.QUEUE_NAME,true,deliverCallback,cancelCallback);
+        channel.basicConsume(MqUtil.QUEUE_NAME,true,deliverCallback,cancelCallback);
     }
 }

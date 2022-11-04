@@ -19,9 +19,9 @@ public class Producer {
         // 创建连接工厂
         ConnectionFactory factory = new ConnectionFactory();
         // 设置连接的配置，ip，用户名和密码
-        factory.setHost(Constant.HOSTNAME);
-        factory.setUsername(Constant.USERNAME);
-        factory.setPassword(Constant.PASSWORD);
+        factory.setHost(MqUtil.HOSTNAME);
+        factory.setUsername(MqUtil.USERNAME);
+        factory.setPassword(MqUtil.PASSWORD);
         // 创建连接
         Connection connection = factory.newConnection();
         // 通过连接来创建一个信道
@@ -34,7 +34,7 @@ public class Producer {
          * 4. 最后一个消费者断开连接之后，该队列是否自动删除。true表示自动删除，false表示不自动删除
          * 5. 其他参数
          */
-        channel.queueDeclare(Constant.QUEUE_NAME,false,false,false,null);
+        channel.queueDeclare(MqUtil.QUEUE_NAME,false,false,false,null);
 
         String message = "Hello";
 
@@ -45,7 +45,7 @@ public class Producer {
          * 3. 其他参数信息
          * 4. 发送消息的消息体
          */
-        channel.basicPublish("",Constant.QUEUE_NAME,null,message.getBytes());
+        channel.basicPublish("", MqUtil.QUEUE_NAME,null,message.getBytes());
         System.out.println("消息发送成功");
     }
 }
