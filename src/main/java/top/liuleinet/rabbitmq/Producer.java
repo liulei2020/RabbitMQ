@@ -30,6 +30,7 @@ public class Producer {
          * 通过一个信道来生成一个队列
          * 1. 队列的名称
          * 2. true表示声明的是一个持久化队列，该队列会在服务器重启后依旧存活
+         *              队列持久化的开启主要是第二个参数（durable）
          * 3. true表示声明的是一个独占队列，被限制在这个连接中。
          * 4. 最后一个消费者断开连接之后，该队列是否自动删除。true表示自动删除，false表示不自动删除
          * 5. 其他参数
@@ -42,7 +43,9 @@ public class Producer {
          * 发送一个消息
          * 1. 发送到哪个交换机
          * 2. 路由的key值是哪个，本次是队列的名称
-         * 3. 其他参数信息
+         * 3. 其他参数信息    消息持久化的开启主要是第三个参数（props）
+         *                  这个参数是比较多的，需要在这里配置消息是持久化的。
+         *                  需要配置一个常数（MessageProperties.PERSISTENT_TEXT_PLAIN）
          * 4. 发送消息的消息体
          */
         channel.basicPublish("", MqUtil.QUEUE_NAME,null,message.getBytes());
